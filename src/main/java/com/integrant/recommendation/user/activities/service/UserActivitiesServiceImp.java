@@ -39,24 +39,38 @@ public class UserActivitiesServiceImp implements UserActivitiesService {
 	/** The Constant PRODUCT_ID. */
 	private static final String ACTIONS = ".actions";
 
+	/** The Constant VIEW. */
 	private static final String VIEW = ".view";
 
+	/** The Constant ADD_TO_CART. */
 	private static final String ADD_TO_CART = ".addToCart";
 
+	/** The Constant CHECKOUT. */
 	private static final String CHECKOUT = ".checkout";
 
+	/** The Constant JOIN. */
 	private static final String JOIN = ".join";
 
+	/** The Constant SUBSCRIBE. */
 	private static final String SUBSCRIBE = ".subscribe";
 
+	/** The Constant PLACE_ORDER. */
 	private static final String PLACE_ORDER = ".placeOrder";
 	
+	/** The Constant PRODUCT_ACTIONS. */
 	private static final String PRODUCT_ACTIONS = "product_actions.";
 	
+	/** The Constant COUNT. */
 	private static final String COUNT = ".count";
 	
+	/** The Constant ACTION_DATE. */
 	private static final String ACTION_DATE = ".action_date";
 
+	/**
+	 * Incerment user actions.
+	 *
+	 * @param userActivityDto the user activity dto
+	 */
 	@Override
 	public void incermentUserActions(UserActivityDto userActivityDto) {
 

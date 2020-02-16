@@ -34,18 +34,32 @@ public class UserActivityDto implements Serializable{
 	(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date timeStamp;
 
+	/** The Constant VIEW. */
 	private static final String VIEW = "view";
 
+	/** The Constant ADD_TO_CART. */
 	private static final String ADD_TO_CART = "addToCart";
 
+	/** The Constant CHECKOUT. */
 	private static final String CHECKOUT = "checkout";
 
+	/** The Constant JOIN. */
 	private static final String JOIN = "join";
 
+	/** The Constant SUBSCRIBE. */
 	private static final String SUBSCRIBE = "subscribe";
 
+	/** The Constant PLACE_ORDER. */
 	private static final String PLACE_ORDER = "placeOrder";
 
+	/**
+	 * Instantiates a new user activity dto.
+	 *
+	 * @param userId the user id
+	 * @param productId the product id
+	 * @param action the action
+	 * @param timeStamp the time stamp
+	 */
 	public UserActivityDto(String userId, String productId, String action, Date timeStamp) {
 		this.userId = userId;
 		this.productId = productId;
@@ -53,26 +67,56 @@ public class UserActivityDto implements Serializable{
 		this.timeStamp = timeStamp;
 	}
 
+	/**
+	 * Gets the user id.
+	 *
+	 * @return the user id
+	 */
 	public String getUserId() {
 		return userId;
 	}
 
+	/**
+	 * Gets the product id.
+	 *
+	 * @return the product id
+	 */
 	public String getProductId() {
 		return productId;
 	}
 
+	/**
+	 * Gets the action.
+	 *
+	 * @return the action
+	 */
 	public String getAction() {
 		return action;
 	}
 
+	/**
+	 * Gets the time stamp.
+	 *
+	 * @return the time stamp
+	 */
 	public Date getTimeStamp() {
 		return timeStamp;
 	}
 
+	/**
+	 * Checks if is valid.
+	 *
+	 * @return true, if is valid
+	 */
 	public boolean isValid() {
 		return userId != null && productId != null && action != null && timeStamp != null;
 	}
 
+	/**
+	 * Builds the.
+	 *
+	 * @return the user activity
+	 */
 	public UserActivity build() {
 
 		Map<String , ProductActions> productsActionsMap = new HashMap<>();
@@ -98,6 +142,12 @@ public class UserActivityDto implements Serializable{
 		return new UserActivity(userId, productsActionsMap);
 	}
 
+	/**
+	 * Creates the action.
+	 *
+	 * @param actionsMap the actions map
+	 * @param actionName the action name
+	 */
 	private void createAction(Map<String, ActionDetails> actionsMap, String actionName) {
 
 		ActionDetails viewDetails;
@@ -119,6 +169,12 @@ public class UserActivityDto implements Serializable{
 		actionsMap.put(actionName, viewDetails);
 	}
 
+	/**
+	 * Checks for action.
+	 *
+	 * @param actionName the action name
+	 * @return true, if successful
+	 */
 	public boolean hasAction(String actionName) {
 		return action.equalsIgnoreCase(actionName);
 	}

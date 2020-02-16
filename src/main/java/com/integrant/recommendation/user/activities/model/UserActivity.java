@@ -1,7 +1,6 @@
 package com.integrant.recommendation.user.activities.model;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
@@ -30,7 +29,6 @@ public class UserActivity implements Serializable {
 	/** The action. */
 	@Field("product_actions")
 	private Map<String , ProductActions> productsActions;
-
 	
 	/**
 	 * Instantiates a new user activity.
@@ -38,19 +36,43 @@ public class UserActivity implements Serializable {
 	public UserActivity() {
 	}
 
-
+	/**
+	 * Instantiates a new user activity.
+	 *
+	 * @param userId the user id
+	 * @param productsActions the products actions
+	 */
 	public UserActivity(String userId, Map<String , ProductActions> productsActions) {
 		this.userId = userId;
 		this.productsActions = productsActions;
 	}
 
 
+	/**
+	 * Gets the user id.
+	 *
+	 * @return the user id
+	 */
 	public String getUserId() {
 		return userId;
 	}
 
+	/**
+	 * Gets the products actions.
+	 *
+	 * @return the products actions
+	 */
 	public Map<String , ProductActions> getProductsActions() {
 		return productsActions;
 	}
-	
+
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return "UserActivity [userId=" + userId + ", productsActions=" + productsActions + "]";
+	}
 }

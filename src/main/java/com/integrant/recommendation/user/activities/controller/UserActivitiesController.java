@@ -24,6 +24,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The Class UserActivitiesController.
+ */
 @Api(value="Operations pertaining to User Activity Management")
 @ApiResponses(value = {
 		@ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -38,12 +41,20 @@ public class UserActivitiesController {
 
 	
 
+		/** The user activities service imp. */
 		@Autowired
 		private UserActivitiesServiceImp userActivitiesServiceImp;
 
 		/** The logger. */
 		private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+		/**
+		 * Save user activity.
+		 *
+		 * @param userActivityDto the user activity dto
+		 * @return the response entity
+		 * @throws BadRequestException the bad request exception
+		 */
 		@ApiOperation(value = "Add new User Activity")
 		@PostMapping("/activities")
 		public ResponseEntity<Object> saveUserActivity(@Validated @RequestBody UserActivityDto userActivityDto) throws BadRequestException {
@@ -57,6 +68,12 @@ public class UserActivitiesController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 
+		/**
+		 * Gets the user activity by user id.
+		 *
+		 * @param userId the user id
+		 * @return the user activity by user id
+		 */
 		@ApiOperation(value = "get User Activity By User Id")
 		@GetMapping("/activities/{userId}")
 		public UserActivity getUserActivityByUserId(@Validated @PathVariable String userId) {
