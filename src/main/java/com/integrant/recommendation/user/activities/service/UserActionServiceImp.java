@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.integrant.recommendation.user.activities.constants.AppConstants;
 import com.integrant.recommendation.user.activities.dto.UserActionDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
 import com.integrant.recommendation.user.activities.model.UserAction;
@@ -42,7 +43,7 @@ public class UserActionServiceImp implements UserActionService {
 	 */
 	@Override
 	public UserAction getUserAction(String id) {
-		
+
 		return userActionRepository.findById(id).orElse(null);
 	}
 
@@ -53,22 +54,42 @@ public class UserActionServiceImp implements UserActionService {
 	 */
 	@Override
 	public List<UserAction> getAllUserActions() {
-		
+
 		return userActionRepository.findAll();
+	}
+
+	/**
+	 * Validate user action dto.
+	 *
+	 * @param userActionDto the user action dto
+	 * @throws BadRequestException the bad request exception
+	 */
+	public void validateUserActionDto(UserActionDto userActionDto) throws BadRequestException {
+
+		UserAction userAction = userActionRepository.findUserActionByActionName(userActionDto.getActionName());
+
+		if(userAction != null)
+			throw new BadRequestException(AppConstants.ACTION_ALREADY_EXISTS);
 	}
 
 	/**
 	 * Validate user action.
 	 *
-	 * @param userActionDto the user action dto
+	 * @param userAction the user action
 	 * @throws BadRequestException the bad request exception
 	 */
-	public void validateUserAction(UserActionDto userActionDto) throws BadRequestException {
+	@Override
+	public void validateUserAction(UserAction userAction) throws BadRequestException {
+
+		if(userAction.getId() == null)
+			throw new BadRequestException(AppConstants.INVALID_ACTION_ID);
+
+		UserAction currentUserAction = userActionRepository.findById(userAction.getId()).orElse(null);
+
+		if(currentUserAction == null)
+			throw new BadRequestException(AppConstants.ACTION_NOT_EXISTS);
 		
-		UserAction userAction = userActionRepository.findUserActionByActionName(userActionDto.getActionName());
-		
-		if(userAction != null)
-			throw new BadRequestException("This user action already exists");
+		userActionRepository.save(userAction);
 	}
 }
 

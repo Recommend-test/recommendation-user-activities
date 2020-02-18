@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import com.integrant.recommendation.user.activities.constants.AppConstants;
 import com.integrant.recommendation.user.activities.dto.UserActivityDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
 import com.integrant.recommendation.user.activities.model.UserActivity;
@@ -148,7 +149,7 @@ public class UserActivitiesServiceImp implements UserActivitiesService {
 	public void validateUserActivityDto(UserActivityDto userActivityDto) throws BadRequestException {
 
 		if(!userActivityDto.checkValidity())
-			throw new BadRequestException("Invalid User Activity");
+			throw new BadRequestException(AppConstants.INVALID_USER_ACTIVITY);
 	}
 
 }

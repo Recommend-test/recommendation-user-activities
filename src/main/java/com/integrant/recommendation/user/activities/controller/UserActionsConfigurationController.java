@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The Class UserActionsConfigurationController.
+ */
 @Api(value="Operations pertaining to User Actions Configuration Management")
 @ApiResponses(value = {
 		@ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -38,14 +42,22 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/api/v1")
 public class UserActionsConfigurationController {
 	
+	/** The user action service imp. */
 	@Autowired
 	private UserActionServiceImp userActionServiceImp;
 	
+	/**
+	 * Save user activity.
+	 *
+	 * @param userActionDto the user action dto
+	 * @return the response entity
+	 * @throws BadRequestException the bad request exception
+	 */
 	@ApiOperation(value = "Add new User actions weights configuration")
 	@PostMapping("/actions")
 	public ResponseEntity<Object> saveUserActivity(@Validated @RequestBody UserActionDto userActionDto) throws BadRequestException {
 		
-		userActionServiceImp.validateUserAction(userActionDto);
+		userActionServiceImp.validateUserActionDto(userActionDto);
 		
 		String id = userActionServiceImp.saveUserAction(userActionDto.build());
 		
@@ -56,6 +68,11 @@ public class UserActionsConfigurationController {
 		return new ResponseEntity<>(body, HttpStatus.CREATED);
 	}
 	
+	/**
+	 * Gets the all actions.
+	 *
+	 * @return the all actions
+	 */
 	@ApiOperation(value = "View a list of all user actions", response = List.class)
 	@GetMapping("/actions")
 	public List<UserAction> getAllActions() {
@@ -63,10 +80,34 @@ public class UserActionsConfigurationController {
 		return userActionServiceImp.getAllUserActions();
 	}
 
-	@ApiOperation(value = "get Product Category by Id")
+	/**
+	 * Gets the user actiony by id.
+	 *
+	 * @param id the id
+	 * @return the user actiony by id
+	 */
+	@ApiOperation(value = "get User Action by Id")
 	@GetMapping("/actions/{id}")
 	public UserAction getuserActionyById(@Validated @PathVariable String id) {
 
 		return userActionServiceImp.getUserAction(id);
+	}
+	
+	/**
+	 * Update user action.
+	 *
+	 * @param userAction the user action
+	 * @return the response entity
+	 * @throws BadRequestException the bad request exception
+	 */
+	@ApiOperation(value = "update User actions weights configuration")
+	@PutMapping("/actions")
+	public ResponseEntity<Object> updateUserAction(@Validated @RequestBody UserAction userAction) throws BadRequestException {
+		
+		userActionServiceImp.validateUserAction(userAction);
+		
+		userActionServiceImp.saveUserAction(userAction);
+
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
