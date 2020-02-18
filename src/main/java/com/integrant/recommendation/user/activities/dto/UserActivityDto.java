@@ -51,6 +51,9 @@ public class UserActivityDto implements Serializable{
 
 	/** The Constant PLACE_ORDER. */
 	private static final String PLACE_ORDER = "placeOrder";
+	
+	public UserActivityDto() {
+	}
 
 	/**
 	 * Instantiates a new user activity dto.
@@ -108,7 +111,7 @@ public class UserActivityDto implements Serializable{
 	 *
 	 * @return true, if is valid
 	 */
-	public boolean isValid() {
+	public boolean checkValidity() {
 		return userId != null && productId != null && action != null && timeStamp != null;
 	}
 
@@ -177,5 +180,11 @@ public class UserActivityDto implements Serializable{
 	 */
 	public boolean hasAction(String actionName) {
 		return action.equalsIgnoreCase(actionName);
+	}
+
+	@Override
+	public String toString() {
+		return "UserActivityDto [userId=" + userId + ", productId=" + productId + ", action=" + action + ", timeStamp="
+				+ timeStamp + "]";
 	}
 }

@@ -147,7 +147,7 @@ public class UserActivitiesServiceImp implements UserActivitiesService {
 	 */
 	public void validateUserActivityDto(UserActivityDto userActivityDto) throws BadRequestException {
 
-		if(!userActivityDto.isValid())
+		if(!userActivityDto.checkValidity())
 			throw new BadRequestException("Invalid User Activity");
 	}
 

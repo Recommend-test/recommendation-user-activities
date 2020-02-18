@@ -1,7 +1,6 @@
 package com.integrant.recommendation.user.activities.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.amqp.AmqpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.integrant.recommendation.user.activities.dto.UserActivityDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
 import com.integrant.recommendation.user.activities.model.UserActivity;
+import com.integrant.recommendation.user.activities.producer.UserActivitiesProducer;
 import com.integrant.recommendation.user.activities.service.UserActivitiesServiceImp;
 
 import io.swagger.annotations.Api;
@@ -39,14 +40,12 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/api/v1/users")
 public class UserActivitiesController {
 
-	
-
 		/** The user activities service imp. */
 		@Autowired
 		private UserActivitiesServiceImp userActivitiesServiceImp;
-
-		/** The logger. */
-		private Logger logger = LoggerFactory.getLogger(this.getClass());
+		
+		@Autowired
+		private UserActivitiesProducer userActivitiesProducer;
 
 		/**
 		 * Save user activity.
@@ -54,16 +53,14 @@ public class UserActivitiesController {
 		 * @param userActivityDto the user activity dto
 		 * @return the response entity
 		 * @throws BadRequestException the bad request exception
+		 * @throws JsonProcessingException
+		 * @throws AmqpException 
 		 */
 		@ApiOperation(value = "Add new User Activity")
 		@PostMapping("/activities")
-		public ResponseEntity<Object> saveUserActivity(@Validated @RequestBody UserActivityDto userActivityDto) throws BadRequestException {
+		public ResponseEntity<Object> saveUserActivity(@Validated @RequestBody UserActivityDto userActivityDto) throws BadRequestException, AmqpException, JsonProcessingException {
 			
-			userActivitiesServiceImp.validateUserActivityDto(userActivityDto);
-
-			userActivitiesServiceImp.incermentUserActions(userActivityDto);
-
-			logger.info("User Activity Added");
+			userActivitiesProducer.sendMessage(userActivityDto);
 			
 			return new ResponseEntity<>(HttpStatus.OK);
 		}

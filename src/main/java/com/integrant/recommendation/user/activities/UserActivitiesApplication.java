@@ -17,6 +17,7 @@ public class UserActivitiesApplication {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
+
 		/** The logger. */
 		Logger logger = LoggerFactory.getLogger(UserActivitiesApplication.class);
 
