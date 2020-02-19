@@ -51,7 +51,6 @@ public class UserActivityDto implements Serializable{
 
 	/** The time stamp. */
 	@NotNull(message = "Action time must not be null")
-	@NotEmpty(message = "Action time must not be empty")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date timeStamp;
 

@@ -73,23 +73,22 @@ public class UserActionServiceImp implements UserActionService {
 	}
 
 	/**
-	 * Validate user action.
+	 * Validate user action for update.
 	 *
-	 * @param userAction the user action
+	 * @param userActionDto the user action dto
 	 * @throws BadRequestException the bad request exception
 	 */
 	@Override
-	public void validateUserAction(UserAction userAction) throws BadRequestException {
+	public void validateUserActionForUpdate(UserActionDto userActionDto) throws BadRequestException {
 
-		if(userAction.getId() == null)
+		if(userActionDto.getId() == null)
 			throw new BadRequestException(AppConstants.INVALID_ACTION_ID);
 
-		UserAction currentUserAction = userActionRepository.findById(userAction.getId()).orElse(null);
+		UserAction currentUserAction = userActionRepository.findById(userActionDto.getId()).orElse(null);
 
 		if(currentUserAction == null)
 			throw new BadRequestException(AppConstants.ACTION_NOT_EXISTS);
 		
-		userActionRepository.save(userAction);
 	}
 }
 

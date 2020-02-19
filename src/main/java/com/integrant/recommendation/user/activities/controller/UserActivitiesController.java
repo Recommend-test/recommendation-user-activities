@@ -59,7 +59,7 @@ public class UserActivitiesController {
 		 */
 		@ApiOperation(value = "Add new User Activity")
 		@PostMapping("/activities")
-		public ResponseEntity<Object> saveUserActivity(@Validated @RequestBody UserActivityDto userActivityDto) throws BadRequestException, AmqpException, JsonProcessingException {
+		public ResponseEntity<Object> saveUserActivity(@Validated @RequestBody UserActivityDto userActivityDto) throws BadRequestException, JsonProcessingException {
 			
 			userActivitiesProducer.sendMessage(userActivityDto);
 			

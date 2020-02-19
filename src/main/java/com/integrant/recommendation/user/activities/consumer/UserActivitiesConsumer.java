@@ -13,6 +13,9 @@ import com.integrant.recommendation.user.activities.dto.UserActivityDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
 import com.integrant.recommendation.user.activities.service.UserActivitiesServiceImp;
 
+/**
+ * The Class UserActivitiesConsumer.
+ */
 @Component
 public class UserActivitiesConsumer {
 
@@ -20,24 +23,31 @@ public class UserActivitiesConsumer {
 	@Autowired
 	private UserActivitiesServiceImp userActivitiesServiceImp;
 
+	/** The logger. */
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	/** The object mapper. */
+	@Autowired
+	private ObjectMapper objectMapper;
 
+	/**
+	 * Receive message.
+	 *
+	 * @param message the message
+	 * @throws BadRequestException the bad request exception
+	 */
 	@RabbitListener(queues="${user.activity.queue.name}")
 	public void receiveMessage(String message) throws BadRequestException {
 
-		logger.info("Received <" + message + ">");
+		logger.info("Received {}", message);
 
 		UserActivityDto userActivityDto = null;
-
-		ObjectMapper objectMapper = new ObjectMapper();
 
 		try {
 
 			userActivityDto = objectMapper.readValue(message, UserActivityDto.class);
 
-			logger.info("User Id = " + userActivityDto.getUserId());
-
-			logger.info("User Action = " + userActivityDto.getAction());
+			logger.info("UserActivityDto {}", userActivityDto);
 
 			userActivitiesServiceImp.validateUserActivityDto(userActivityDto);
 
@@ -47,11 +57,8 @@ public class UserActivitiesConsumer {
 
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			logger.error("Exception", e);
 		}
-
 	}
-
-
 }
 

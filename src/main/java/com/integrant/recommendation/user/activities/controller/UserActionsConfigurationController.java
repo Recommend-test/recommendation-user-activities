@@ -102,11 +102,11 @@ public class UserActionsConfigurationController {
 	 */
 	@ApiOperation(value = "update User actions weights configuration")
 	@PutMapping("/actions")
-	public ResponseEntity<Object> updateUserAction(@Validated @RequestBody UserAction userAction) throws BadRequestException {
+	public ResponseEntity<Object> updateUserAction(@Validated @RequestBody UserActionDto userActionDto) throws BadRequestException {
 		
-		userActionServiceImp.validateUserAction(userAction);
+		userActionServiceImp.validateUserActionForUpdate(userActionDto);
 		
-		userActionServiceImp.saveUserAction(userAction);
+		userActionServiceImp.saveUserAction(userActionDto.buildForUpdate());
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

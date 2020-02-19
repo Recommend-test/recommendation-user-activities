@@ -34,39 +34,6 @@ public class UserActivitiesServiceImp implements UserActivitiesService {
 	/** The logger. */
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	/** The Constant USER_ID. */
-	private static final String USER_ID = "_id";
-
-	/** The Constant PRODUCT_ID. */
-	private static final String ACTIONS = ".actions";
-
-	/** The Constant VIEW. */
-	private static final String VIEW = ".view";
-
-	/** The Constant ADD_TO_CART. */
-	private static final String ADD_TO_CART = ".addToCart";
-
-	/** The Constant CHECKOUT. */
-	private static final String CHECKOUT = ".checkout";
-
-	/** The Constant JOIN. */
-	private static final String JOIN = ".join";
-
-	/** The Constant SUBSCRIBE. */
-	private static final String SUBSCRIBE = ".subscribe";
-
-	/** The Constant PLACE_ORDER. */
-	private static final String PLACE_ORDER = ".placeOrder";
-	
-	/** The Constant PRODUCT_ACTIONS. */
-	private static final String PRODUCT_ACTIONS = "product_actions.";
-	
-	/** The Constant COUNT. */
-	private static final String COUNT = ".count";
-	
-	/** The Constant ACTION_DATE. */
-	private static final String ACTION_DATE = ".action_date";
-
 	/**
 	 * Incerment user actions.
 	 *
@@ -88,44 +55,44 @@ public class UserActivitiesServiceImp implements UserActivitiesService {
 
 			Query query = new Query();
 
-			query.addCriteria(Criteria.where(USER_ID).is(userActivityDto.getUserId()));
+			query.addCriteria(Criteria.where(AppConstants.USER_ID).is(userActivityDto.getUserId()));
 
 			Update update = new Update();
 
 			if(userActivityDto.hasAction("view")) {
-				update.inc(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + VIEW + COUNT, 1);
-				update.addToSet(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + VIEW + ACTION_DATE, userActivityDto.getTimeStamp());
+				update.inc(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.VIEW + AppConstants.COUNT, 1);
+				update.addToSet(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.VIEW + AppConstants.ACTION_DATE, userActivityDto.getTimeStamp());
 			}
 
 			if(userActivityDto.hasAction("addToCart")) {
-				update.inc(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + ADD_TO_CART + COUNT, 1);
-				update.addToSet(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + ADD_TO_CART + ACTION_DATE, userActivityDto.getTimeStamp());
+				update.inc(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.ADD_TO_CART + AppConstants.COUNT, 1);
+				update.addToSet(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.ADD_TO_CART + AppConstants.ACTION_DATE, userActivityDto.getTimeStamp());
 			}
 
 			if(userActivityDto.hasAction("checkout")) {
-				update.inc(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + CHECKOUT + COUNT, 1);
-				update.addToSet(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + CHECKOUT + ACTION_DATE, userActivityDto.getTimeStamp());
+				update.inc(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.CHECKOUT + AppConstants.COUNT, 1);
+				update.addToSet(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.CHECKOUT + AppConstants.ACTION_DATE, userActivityDto.getTimeStamp());
 			}
 
 			if(userActivityDto.hasAction("join")) {
-				update.inc(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + JOIN + COUNT, 1);
-				update.addToSet(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + JOIN + ACTION_DATE, userActivityDto.getTimeStamp());
+				update.inc(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.JOIN + AppConstants.COUNT, 1);
+				update.addToSet(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.JOIN + AppConstants.ACTION_DATE, userActivityDto.getTimeStamp());
 			}
 
 			if(userActivityDto.hasAction("subscribe")) {
-				update.inc(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + SUBSCRIBE + COUNT, 1);
-				update.addToSet(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + SUBSCRIBE + ACTION_DATE, userActivityDto.getTimeStamp());
+				update.inc(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.SUBSCRIBE + AppConstants.COUNT, 1);
+				update.addToSet(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.SUBSCRIBE + AppConstants.ACTION_DATE, userActivityDto.getTimeStamp());
 			}
 
 			if(userActivityDto.hasAction("placeOrder")) {
-				update.inc(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + PLACE_ORDER + COUNT, 1);
-				update.addToSet(PRODUCT_ACTIONS + userActivityDto.getProductId() + ACTIONS + PLACE_ORDER + ACTION_DATE, userActivityDto.getTimeStamp());
+				update.inc(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.PLACE_ORDER + AppConstants.COUNT, 1);
+				update.addToSet(AppConstants.PRODUCT_ACTIONS + userActivityDto.getProductId() + AppConstants.ACTIONS + AppConstants.PLACE_ORDER + AppConstants.ACTION_DATE, userActivityDto.getTimeStamp());
 			}
 
 			UserActivity userActivityUpdated = mongoOperation.findAndModify(query, update, 
 					new FindAndModifyOptions().returnNew(true), UserActivity.class);
 
-			logger.info("userActivityUpdated - " + userActivityUpdated);
+			logger.info("userActivityUpdated {}" , userActivityUpdated);
 		}
 	}
 
