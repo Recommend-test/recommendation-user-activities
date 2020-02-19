@@ -5,12 +5,17 @@ import javax.validation.constraints.NotNull;
 
 import com.integrant.recommendation.user.activities.model.UserAction;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @NoArgsConstructor @ToString
+@Getter
+@Setter 
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class UserActionDto {
 	
 	@NotNull(message = "User action must not be null")

@@ -40,5 +40,13 @@ public interface UserActionService {
 	 * @param userActionDto the user action dto
 	 * @throws BadRequestException the bad request exception
 	 */
-	public void validateUserAction(UserActionDto userActionDto) throws BadRequestException;
+	public void validateUserActionDto(UserActionDto userActionDto) throws BadRequestException;
+	
+	/**
+	 * Validate user action.
+	 *
+	 * @param userAction the user action
+	 * @throws BadRequestException the bad request exception
+	 */
+	public void validateUserAction(UserAction userAction) throws BadRequestException;
 }

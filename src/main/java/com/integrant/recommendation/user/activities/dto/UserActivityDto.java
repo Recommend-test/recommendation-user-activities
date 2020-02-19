@@ -7,31 +7,52 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.integrant.recommendation.user.activities.model.ActionDetails;
 import com.integrant.recommendation.user.activities.model.ProductActions;
 import com.integrant.recommendation.user.activities.model.UserActivity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * The Class UserActivityDto.
  */
+@Getter
+@Setter 
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class UserActivityDto implements Serializable{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The user id. */
+	@NotNull(message = "User Id must not be null")
+	@NotEmpty(message = "User Id must not be empty")
 	private String userId;
 
 	/** The product id. */
+	@NotNull(message = "Product Id must not be null")
+	@NotEmpty(message = "Product Id must not be empty")
 	private String productId;
 
 	/** The action. */
+	@NotNull(message = "Action must not be null")
+	@NotEmpty(message = "Action must not be empty")
 	private String action;
 
 	/** The time stamp. */
-	@JsonFormat
-	(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	@NotNull(message = "Action time must not be null")
+	@NotEmpty(message = "Action time must not be empty")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date timeStamp;
 
 	/** The Constant VIEW. */
@@ -51,60 +72,6 @@ public class UserActivityDto implements Serializable{
 
 	/** The Constant PLACE_ORDER. */
 	private static final String PLACE_ORDER = "placeOrder";
-	
-	public UserActivityDto() {
-	}
-
-	/**
-	 * Instantiates a new user activity dto.
-	 *
-	 * @param userId the user id
-	 * @param productId the product id
-	 * @param action the action
-	 * @param timeStamp the time stamp
-	 */
-	public UserActivityDto(String userId, String productId, String action, Date timeStamp) {
-		this.userId = userId;
-		this.productId = productId;
-		this.action = action;
-		this.timeStamp = timeStamp;
-	}
-
-	/**
-	 * Gets the user id.
-	 *
-	 * @return the user id
-	 */
-	public String getUserId() {
-		return userId;
-	}
-
-	/**
-	 * Gets the product id.
-	 *
-	 * @return the product id
-	 */
-	public String getProductId() {
-		return productId;
-	}
-
-	/**
-	 * Gets the action.
-	 *
-	 * @return the action
-	 */
-	public String getAction() {
-		return action;
-	}
-
-	/**
-	 * Gets the time stamp.
-	 *
-	 * @return the time stamp
-	 */
-	public Date getTimeStamp() {
-		return timeStamp;
-	}
 
 	/**
 	 * Checks if is valid.
@@ -180,11 +147,5 @@ public class UserActivityDto implements Serializable{
 	 */
 	public boolean hasAction(String actionName) {
 		return action.equalsIgnoreCase(actionName);
-	}
-
-	@Override
-	public String toString() {
-		return "UserActivityDto [userId=" + userId + ", productId=" + productId + ", action=" + action + ", timeStamp="
-				+ timeStamp + "]";
 	}
 }

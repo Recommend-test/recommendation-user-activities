@@ -44,6 +44,7 @@ public class UserActivitiesController {
 		@Autowired
 		private UserActivitiesServiceImp userActivitiesServiceImp;
 		
+		/** The user activities producer. */
 		@Autowired
 		private UserActivitiesProducer userActivitiesProducer;
 
@@ -53,8 +54,8 @@ public class UserActivitiesController {
 		 * @param userActivityDto the user activity dto
 		 * @return the response entity
 		 * @throws BadRequestException the bad request exception
-		 * @throws JsonProcessingException
-		 * @throws AmqpException 
+		 * @throws AmqpException the amqp exception
+		 * @throws JsonProcessingException the json processing exception
 		 */
 		@ApiOperation(value = "Add new User Activity")
 		@PostMapping("/activities")
