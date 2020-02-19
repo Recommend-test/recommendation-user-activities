@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.integrant.recommendation.user.activities.dto.UserActionDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
+import com.integrant.recommendation.user.activities.exceptions.ResourceNotFoundException;
 import com.integrant.recommendation.user.activities.model.UserAction;
 import com.integrant.recommendation.user.activities.service.UserActionServiceImp;
 
@@ -99,15 +101,30 @@ public class UserActionsConfigurationController {
 	 * @param userAction the user action
 	 * @return the response entity
 	 * @throws BadRequestException the bad request exception
+	 * @throws ResourceNotFoundException 
 	 */
 	@ApiOperation(value = "update User actions weights configuration")
 	@PutMapping("/actions")
-	public ResponseEntity<Object> updateUserAction(@Validated @RequestBody UserActionDto userActionDto) throws BadRequestException {
+	public ResponseEntity<Object> updateUserAction(@Validated @RequestBody UserActionDto userActionDto) throws BadRequestException, ResourceNotFoundException {
 		
 		userActionServiceImp.validateUserActionForUpdate(userActionDto);
 		
 		userActionServiceImp.saveUserAction(userActionDto.buildForUpdate());
 
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	/**
+	 * Delete product category by id.
+	 *
+	 * @param id the id
+	 * @throws DataConflictException the data conflict exception
+	 * @throws ResourceNotFoundException 
+	 */
+	@ApiOperation(value = "delete UserAction by Id")
+	@DeleteMapping("/categories/{id}")
+	public void deleteUserActionById(@Validated @PathVariable String id) throws ResourceNotFoundException {
+
+		userActionServiceImp.deleteUserAction(id);
 	}
 }

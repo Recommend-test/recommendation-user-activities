@@ -77,4 +77,20 @@ public class ControllerAdvisor {
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 
 	}
+	
+	/**
+	 * Handle resource not found exception.
+	 *
+	 * @param ex the ex
+	 * @param request the request
+	 * @return the response entity
+	 */
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+		
+		RecommendationErrorResponse error = new RecommendationErrorResponse(LocalDateTime.now(), 
+				HttpStatus.NOT_FOUND.value(), ex.getMessage());
+
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	}
 }

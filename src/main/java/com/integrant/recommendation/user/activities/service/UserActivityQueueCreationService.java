@@ -16,17 +16,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserActivityQueueCreationService {
 	
-	/** The rabbit admin. */
-	@Autowired
-	private RabbitAdmin rabbitAdmin;
-	
-	/** The user activity exchange name. */
-	@Value("${user.activity.exchange.name}")
-	private String userActivityExchangeName;
+	/** The recommendation exchange name. */
+	@Value("${recommendation.exchange.name}")
+	private String recommendationExchangeName;
 	
 	/** The user activity queue name. */
 	@Value("${user.activity.queue.name}")
 	private String userActivityQueueName;
+	
+	/** The rabbit admin. */
+	@Autowired
+	private RabbitAdmin rabbitAdmin;
 	
 	/**
 	 * Inits the.
@@ -34,7 +34,7 @@ public class UserActivityQueueCreationService {
 	@PostConstruct
 	private void init() {
 		
-		DirectExchange exchange = new DirectExchange(userActivityExchangeName);
+		DirectExchange exchange = new DirectExchange(recommendationExchangeName);
 
 		rabbitAdmin.declareExchange(exchange);
 		

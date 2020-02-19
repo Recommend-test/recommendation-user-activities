@@ -18,14 +18,12 @@ import com.integrant.recommendation.user.activities.model.UserActivity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
  * The Class UserActivityDto.
  */
 @Getter
-@Setter 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -54,24 +52,6 @@ public class UserActivityDto implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date timeStamp;
 
-	/** The Constant VIEW. */
-	private static final String VIEW = "view";
-
-	/** The Constant ADD_TO_CART. */
-	private static final String ADD_TO_CART = "addToCart";
-
-	/** The Constant CHECKOUT. */
-	private static final String CHECKOUT = "checkout";
-
-	/** The Constant JOIN. */
-	private static final String JOIN = "join";
-
-	/** The Constant SUBSCRIBE. */
-	private static final String SUBSCRIBE = "subscribe";
-
-	/** The Constant PLACE_ORDER. */
-	private static final String PLACE_ORDER = "placeOrder";
-
 	/**
 	 * Checks if is valid.
 	 *
@@ -84,25 +64,16 @@ public class UserActivityDto implements Serializable{
 	/**
 	 * Builds the.
 	 *
+	 * @param actionName the action name
 	 * @return the user activity
 	 */
-	public UserActivity build() {
+	public UserActivity build(String actionName) {
 
 		Map<String , ProductActions> productsActionsMap = new HashMap<>();
 
 		Map<String, ActionDetails> actionsMap = new HashMap<>();
 
-		createAction(actionsMap, VIEW);
-		
-		createAction(actionsMap, ADD_TO_CART);
-
-		createAction(actionsMap, CHECKOUT);
-
-		createAction(actionsMap, JOIN);
-
-		createAction(actionsMap, SUBSCRIBE);
-
-		createAction(actionsMap, PLACE_ORDER);
+		createAction(actionsMap, actionName);
 
 		ProductActions productActions = new ProductActions(productId, actionsMap);
 
@@ -119,23 +90,13 @@ public class UserActivityDto implements Serializable{
 	 */
 	private void createAction(Map<String, ActionDetails> actionsMap, String actionName) {
 
-		ActionDetails viewDetails;
-
 		List<Date> dates = new ArrayList<>();
 
-		if(action.equalsIgnoreCase(actionName)) {
+		dates.add(timeStamp);
 
-			dates.add(timeStamp);
+		ActionDetails actionDetails = new ActionDetails(1, dates);
 
-			viewDetails = new ActionDetails(1, dates);
-		}
-
-		else {
-
-			viewDetails = new ActionDetails(0, null);
-		}
-
-		actionsMap.put(actionName, viewDetails);
+		actionsMap.put(actionName, actionDetails);
 	}
 
 	/**

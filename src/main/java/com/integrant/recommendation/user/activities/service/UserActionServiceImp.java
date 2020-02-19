@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.integrant.recommendation.user.activities.constants.AppConstants;
 import com.integrant.recommendation.user.activities.dto.UserActionDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
+import com.integrant.recommendation.user.activities.exceptions.ResourceNotFoundException;
 import com.integrant.recommendation.user.activities.model.UserAction;
 import com.integrant.recommendation.user.activities.repository.UserActionRepository;
 
@@ -20,7 +21,7 @@ public class UserActionServiceImp implements UserActionService {
 	/** The user action repository. */
 	@Autowired
 	private UserActionRepository userActionRepository;
-
+	
 	/**
 	 * Save user action.
 	 *
@@ -31,7 +32,7 @@ public class UserActionServiceImp implements UserActionService {
 	public String saveUserAction(UserAction userAction) {
 
 		userActionRepository.save(userAction);
-
+		
 		return userAction.getId();
 	}
 
@@ -64,6 +65,7 @@ public class UserActionServiceImp implements UserActionService {
 	 * @param userActionDto the user action dto
 	 * @throws BadRequestException the bad request exception
 	 */
+	@Override
 	public void validateUserActionDto(UserActionDto userActionDto) throws BadRequestException {
 
 		UserAction userAction = userActionRepository.findUserActionByActionName(userActionDto.getActionName());
@@ -77,9 +79,10 @@ public class UserActionServiceImp implements UserActionService {
 	 *
 	 * @param userActionDto the user action dto
 	 * @throws BadRequestException the bad request exception
+	 * @throws ResourceNotFoundException 
 	 */
 	@Override
-	public void validateUserActionForUpdate(UserActionDto userActionDto) throws BadRequestException {
+	public void validateUserActionForUpdate(UserActionDto userActionDto) throws BadRequestException, ResourceNotFoundException {
 
 		if(userActionDto.getId() == null)
 			throw new BadRequestException(AppConstants.INVALID_ACTION_ID);
@@ -87,8 +90,24 @@ public class UserActionServiceImp implements UserActionService {
 		UserAction currentUserAction = userActionRepository.findById(userActionDto.getId()).orElse(null);
 
 		if(currentUserAction == null)
-			throw new BadRequestException(AppConstants.ACTION_NOT_EXISTS);
+			throw new ResourceNotFoundException(AppConstants.ACTION_NOT_EXISTS);
+	}
+	
+	/**
+	 * Delete user action.
+	 *
+	 * @param id the id
+	 * @throws ResourceNotFoundException the resource not found exception
+	 */
+	@Override
+	public void deleteUserAction(String id) throws ResourceNotFoundException {
 		
+		UserAction currentUserAction = userActionRepository.findById(id).orElse(null);
+
+		if(currentUserAction == null)
+			throw new ResourceNotFoundException(AppConstants.ACTION_NOT_EXISTS);
+
+		userActionRepository.deleteById(id);
 	}
 }
 

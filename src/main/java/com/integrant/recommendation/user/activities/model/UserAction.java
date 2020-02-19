@@ -40,6 +40,12 @@ public class UserAction {
 	@Field("weight")
 	private Integer weight;
 
+	/**
+	 * Instantiates a new user action.
+	 *
+	 * @param actionName the action name
+	 * @param weight the weight
+	 */
 	public UserAction(String actionName, Integer weight) {
 		this.id = UUID.randomUUID().toString();
 		this.actionName = actionName;

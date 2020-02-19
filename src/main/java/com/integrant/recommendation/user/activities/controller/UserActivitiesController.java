@@ -1,6 +1,5 @@
 package com.integrant.recommendation.user.activities.controller;
 
-import org.springframework.amqp.AmqpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,13 +53,14 @@ public class UserActivitiesController {
 		 * @param userActivityDto the user activity dto
 		 * @return the response entity
 		 * @throws BadRequestException the bad request exception
-		 * @throws AmqpException the amqp exception
 		 * @throws JsonProcessingException the json processing exception
 		 */
 		@ApiOperation(value = "Add new User Activity")
 		@PostMapping("/activities")
 		public ResponseEntity<Object> saveUserActivity(@Validated @RequestBody UserActivityDto userActivityDto) throws BadRequestException, JsonProcessingException {
 			
+			userActivitiesServiceImp.validateUserActivityDto(userActivityDto);
+
 			userActivitiesProducer.sendMessage(userActivityDto);
 			
 			return new ResponseEntity<>(HttpStatus.OK);

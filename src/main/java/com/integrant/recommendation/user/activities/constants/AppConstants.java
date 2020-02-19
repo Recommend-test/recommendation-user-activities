@@ -23,6 +23,9 @@ public final class AppConstants {
 	
 	/** The Constant INVALID_USER_ACTIVITY. */
 	public static final String INVALID_USER_ACTIVITY = "Invalid User Activity";
+
+	/** The Constant INVALID_USER_ACTION. */
+	public static final String INVALID_USER_ACTION = "Invalid user action";
 	
 	/** The Constant USER_ID. */
 	public static final String USER_ID = "_id";
@@ -30,24 +33,6 @@ public final class AppConstants {
 	/** The Constant PRODUCT_ID. */
 	public static final String ACTIONS = ".actions";
 
-	/** The Constant VIEW. */
-	public static final String VIEW = ".view";
-
-	/** The Constant ADD_TO_CART. */
-	public static final String ADD_TO_CART = ".addToCart";
-
-	/** The Constant CHECKOUT. */
-	public static final String CHECKOUT = ".checkout";
-
-	/** The Constant JOIN. */
-	public static final String JOIN = ".join";
-
-	/** The Constant SUBSCRIBE. */
-	public static final String SUBSCRIBE = ".subscribe";
-
-	/** The Constant PLACE_ORDER. */
-	public static final String PLACE_ORDER = ".placeOrder";
-	
 	/** The Constant PRODUCT_ACTIONS. */
 	public static final String PRODUCT_ACTIONS = "product_actions.";
 	
@@ -56,5 +41,7 @@ public final class AppConstants {
 	
 	/** The Constant ACTION_DATE. */
 	public static final String ACTION_DATE = ".action_date";
-
+	
+	/** The Constant DOT. */
+	public static final String DOT = ".";
 }

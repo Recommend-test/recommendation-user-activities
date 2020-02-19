@@ -11,39 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- * Gets the weight.
- *
- * @return the weight
- */
 @Getter
-
-/**
- * Sets the weight.
- *
- * @param weight the new weight
- */
 @Setter 
-
-/**
- * Instantiates a new user action dto.
- */
 @NoArgsConstructor
-
-/**
- * Instantiates a new user action dto.
- *
- * @param id the id
- * @param actionName the action name
- * @param weight the weight
- */
 @AllArgsConstructor
-
-/**
- * To string.
- *
- * @return the java.lang. string
- */
 @ToString
 public class UserActionDto {
 	
