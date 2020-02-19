@@ -8,14 +8,12 @@ import com.integrant.recommendation.user.activities.model.UserAction;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
  * The Class UserActionDto.
  */
 @Getter
-@Setter 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
