@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * The Class UserActionDto.
+ */
 @Getter
 @Setter 
 @NoArgsConstructor
