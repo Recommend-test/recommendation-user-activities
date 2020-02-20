@@ -16,10 +16,6 @@ public class RabbitMQProducerService {
 	/** The user activity exchange name. */
 	@Value("${recommendation.exchange.name}")
 	private String recommendationExchangeName;
-	
-	/** The user action update queue name. */
-	@Value("${user.action.update.queue.name}")
-	private String userActionUpdateQueueName;
 
 	/** The rabbit template. */
 	@Autowired
