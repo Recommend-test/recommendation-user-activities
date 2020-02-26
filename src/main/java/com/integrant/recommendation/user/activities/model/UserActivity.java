@@ -18,9 +18,32 @@ import lombok.ToString;
 /**
  * The Class UserActivity.
  */
+
+/**
+ * Gets the products actions.
+ *
+ * @return the products actions
+ */
 @Getter
+
+/**
+ * Instantiates a new user activity.
+ */
 @NoArgsConstructor
+
+/**
+ * Instantiates a new user activity.
+ *
+ * @param userId the user id
+ * @param productsActions the products actions
+ */
 @AllArgsConstructor
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 @ToString
 @Document("user_activities")
 @JsonInclude(JsonInclude.Include.NON_NULL)

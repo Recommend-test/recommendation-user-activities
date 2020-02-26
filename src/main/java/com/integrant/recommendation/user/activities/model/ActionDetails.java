@@ -14,9 +14,32 @@ import lombok.ToString;
 /**
  * The Class Action.
  */
+
+/**
+ * Gets the action date.
+ *
+ * @return the action date
+ */
 @Getter
+
+/**
+ * Instantiates a new action details.
+ */
 @NoArgsConstructor
+
+/**
+ * Instantiates a new action details.
+ *
+ * @param count the count
+ * @param actionDate the action date
+ */
 @AllArgsConstructor
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 @ToString
 public class ActionDetails implements Serializable {
 	

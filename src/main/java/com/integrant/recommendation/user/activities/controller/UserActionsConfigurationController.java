@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.integrant.recommendation.user.activities.dto.UserActionDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
 import com.integrant.recommendation.user.activities.exceptions.ResourceNotFoundException;
 import com.integrant.recommendation.user.activities.model.UserAction;
+import com.integrant.recommendation.user.activities.model.UserActionsPage;
 import com.integrant.recommendation.user.activities.service.UserActionServiceImp;
 
 import io.swagger.annotations.Api;
@@ -95,6 +97,13 @@ public class UserActionsConfigurationController {
 		return userActionServiceImp.getUserAction(id);
 	}
 	
+	@ApiOperation(value = "get List of User Action by Offset and Limit")
+	@GetMapping("/actions/page")
+	public UserActionsPage getUserActionsByOffsetAndLimit(@Validated @RequestParam Integer offset, @Validated @RequestParam Integer limit) {
+
+		return userActionServiceImp.findUserActionsByOffsetAndLimit(offset, limit);
+	}
+	
 	/**
 	 * Update user action.
 	 *
@@ -121,8 +130,8 @@ public class UserActionsConfigurationController {
 	 * @throws DataConflictException the data conflict exception
 	 * @throws ResourceNotFoundException 
 	 */
-	@ApiOperation(value = "delete UserAction by Id")
-	@DeleteMapping("/categories/{id}")
+	@ApiOperation(value = "delete User Action by Id")
+	@DeleteMapping("/actions/{id}")
 	public void deleteUserActionById(@Validated @PathVariable String id) throws ResourceNotFoundException {
 
 		userActionServiceImp.deleteUserAction(id);

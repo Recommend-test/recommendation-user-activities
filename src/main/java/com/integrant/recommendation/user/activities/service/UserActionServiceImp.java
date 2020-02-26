@@ -3,6 +3,9 @@ package com.integrant.recommendation.user.activities.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.integrant.recommendation.user.activities.constants.AppConstants;
@@ -10,6 +13,7 @@ import com.integrant.recommendation.user.activities.dto.UserActionDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
 import com.integrant.recommendation.user.activities.exceptions.ResourceNotFoundException;
 import com.integrant.recommendation.user.activities.model.UserAction;
+import com.integrant.recommendation.user.activities.model.UserActionsPage;
 import com.integrant.recommendation.user.activities.repository.UserActionRepository;
 
 /**
@@ -108,6 +112,21 @@ public class UserActionServiceImp implements UserActionService {
 			throw new ResourceNotFoundException(AppConstants.ACTION_NOT_EXISTS);
 
 		userActionRepository.deleteById(id);
+	}
+
+	/**
+	 * Find user actions by offset and limit.
+	 *
+	 * @param offset the offset
+	 * @param limit the limit
+	 * @return the user actions page
+	 */
+	@Override
+	public UserActionsPage findUserActionsByOffsetAndLimit(Integer offset, Integer limit) {
+		
+		Page<UserAction> page = userActionRepository.findAll(PageRequest.of(offset, limit));
+
+		return new UserActionsPage(page.getContent(), page.getTotalElements());
 	}
 }
 

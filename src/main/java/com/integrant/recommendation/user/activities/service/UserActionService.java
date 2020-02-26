@@ -6,6 +6,7 @@ import com.integrant.recommendation.user.activities.dto.UserActionDto;
 import com.integrant.recommendation.user.activities.exceptions.BadRequestException;
 import com.integrant.recommendation.user.activities.exceptions.ResourceNotFoundException;
 import com.integrant.recommendation.user.activities.model.UserAction;
+import com.integrant.recommendation.user.activities.model.UserActionsPage;
 
 /**
  * The Interface UserActionService.
@@ -58,6 +59,14 @@ public interface UserActionService {
 	 * @throws ResourceNotFoundException the resource not found exception
 	 */
 	public void deleteUserAction(String id) throws ResourceNotFoundException;
-
+	
+	/**
+	 * Find user actions by offset and limit.
+	 *
+	 * @param offset the offset
+	 * @param limit the limit
+	 * @return the user actions page
+	 */
+	public UserActionsPage findUserActionsByOffsetAndLimit(Integer offset, Integer limit);
 }
 

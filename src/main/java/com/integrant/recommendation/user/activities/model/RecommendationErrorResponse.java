@@ -12,9 +12,33 @@ import lombok.ToString;
 /**
  * The Class RecommendationErrorResponse.
  */
+
+/**
+ * Gets the error.
+ *
+ * @return the error
+ */
 @Getter
+
+/**
+ * Instantiates a new recommendation error response.
+ */
 @NoArgsConstructor
+
+/**
+ * Instantiates a new recommendation error response.
+ *
+ * @param timestamp the timestamp
+ * @param status the status
+ * @param error the error
+ */
 @AllArgsConstructor
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 @ToString
 public class RecommendationErrorResponse {
 

@@ -23,9 +23,34 @@ import lombok.ToString;
 /**
  * The Class UserActivityDto.
  */
+
+/**
+ * Gets the time stamp.
+ *
+ * @return the time stamp
+ */
 @Getter
+
+/**
+ * Instantiates a new user activity dto.
+ */
 @NoArgsConstructor
+
+/**
+ * Instantiates a new user activity dto.
+ *
+ * @param userId the user id
+ * @param productId the product id
+ * @param action the action
+ * @param timeStamp the time stamp
+ */
 @AllArgsConstructor
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 @ToString
 public class UserActivityDto implements Serializable{
 

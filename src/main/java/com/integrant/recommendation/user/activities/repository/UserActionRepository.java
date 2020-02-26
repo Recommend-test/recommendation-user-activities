@@ -18,5 +18,4 @@ public interface UserActionRepository extends MongoRepository<UserAction, String
 	 * @return the user action
 	 */
 	public UserAction findUserActionByActionName(String actionName);
-
 }

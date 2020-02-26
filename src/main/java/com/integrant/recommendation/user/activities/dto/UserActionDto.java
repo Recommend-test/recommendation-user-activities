@@ -13,9 +13,33 @@ import lombok.ToString;
 /**
  * The Class UserActionDto.
  */
+
+/**
+ * Gets the weight.
+ *
+ * @return the weight
+ */
 @Getter
+
+/**
+ * Instantiates a new user action dto.
+ */
 @NoArgsConstructor
+
+/**
+ * Instantiates a new user action dto.
+ *
+ * @param id the id
+ * @param actionName the action name
+ * @param weight the weight
+ */
 @AllArgsConstructor
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 @ToString
 public class UserActionDto {
 	

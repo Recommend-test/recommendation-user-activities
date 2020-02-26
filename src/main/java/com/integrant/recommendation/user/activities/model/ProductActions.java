@@ -13,9 +13,32 @@ import lombok.ToString;
 /**
  * The Class ProductActions.
  */
+
+/**
+ * Gets the actions.
+ *
+ * @return the actions
+ */
 @Getter
+
+/**
+ * Instantiates a new product actions.
+ */
 @NoArgsConstructor
+
+/**
+ * Instantiates a new product actions.
+ *
+ * @param productId the product id
+ * @param actions the actions
+ */
 @AllArgsConstructor
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 @ToString
 public class ProductActions implements Serializable {
 
